@@ -15,19 +15,9 @@ const createOrder = catchAsync(async (req, res) => {
     data: order,
   });
 });
-
-const getOrders = catchAsync(async (req, res) => {
-  const order = await orderService.getOrders();
-
-  sendResponse(res, {
-    statusCode: httpStatus.CREATED,
-    message: "Order retrieved successfully",
-    data: order,
-  });
-});
-
 const verifyPayment = catchAsync(async (req, res) => {
   const order = await orderService.verifyPayment(req.query.order_id as string);
+  
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -35,5 +25,17 @@ const verifyPayment = catchAsync(async (req, res) => {
     data: order,
   });
 });
+
+const getOrders = catchAsync(async (req, res) => {
+  const order = await orderService.getOrders();
+   
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    message: "Order retrieved successfully",
+    data: order,
+  });
+});
+
+
 
 export const orderController = { createOrder, verifyPayment, getOrders };

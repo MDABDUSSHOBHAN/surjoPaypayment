@@ -55,9 +55,10 @@ export default function OrderVerification() {
       refetchOnMountOrArgChange: true,
     }
   );
+console.log('orD',data?.data?.verifiedPayment[0].order_id);
 
-  const orderData: OrderData = data?.data?.[0];
-
+  const orderData: OrderData = data?.data?.verifiedPayment[0];
+console.log('orderData',orderData)
   return isLoading ? (
     <Skeleton />
   ) : (

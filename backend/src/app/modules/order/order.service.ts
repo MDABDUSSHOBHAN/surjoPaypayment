@@ -58,6 +58,8 @@ const createOrder = async (
   }
 
   return payment.checkout_url;
+
+// return {order,payment}
 };
 
 const getOrders = async () => {
@@ -69,7 +71,7 @@ const verifyPayment = async (order_id: string) => {
   const verifiedPayment = await orderUtils.verifyPaymentAsync(order_id);
 
   if (verifiedPayment.length) {
-    await Order.findOneAndUpdate(
+         await Order.findOneAndUpdate(
       {
         "transaction.id": order_id,
       },
@@ -92,7 +94,9 @@ const verifyPayment = async (order_id: string) => {
     );
   }
 
-  return verifiedPayment;
+  return {
+    verifiedPayment
+  };
 };
 
 export const orderService = {
